@@ -1,29 +1,30 @@
-import { useEffect, useRef } from "react";
+"use client"
 
+import { useEffect, useRef, useState } from "react";
 const MapNaverDefault = () => {
-
-  const mapElement = useRef(null);
-  const { naver } = window;
-
-  useEffect(() => {
-    if (!mapElement.current || !naver) return;
-    // 지도에 표시할 위치의 위도와 경도 좌표를 파라미터로 넣어줍니다.
-
-    var mapOptions = {
-      center: new naver.maps.LatLng(37.5070856701229, 127.062897340803),
-      zoom: 18,
-      zoomControl: true,
-	  mapTypeControl: true
-    };
-
-    var map = new naver.maps.Map(mapElement.current, mapOptions);
-  }, []);
-
-  return (
-    <>
-      <div ref={mapElement} style={{ minHeight: "100vh" }} />
-    </>
-  );
+	const { naver } = window;
+	const [newMap, setNewMap] = useState<naver.maps.Map | null>(null);
+  	let map: naver.maps.Map;
+	const mapElement = useRef<HTMLDivElement | null>(null);
+	useEffect(() => {
+		if (!mapElement.current || !naver) return;
+		const center = new naver.maps.LatLng(37.3595704, 127.105399);
+		const mapOptions: naver.maps.MapOptions = {
+		  center: center,
+		  zoom: 18,
+		  zoomControl: true,
+		  zoomControlOptions: {
+			style: naver.maps.ZoomControlStyle.SMALL,
+			position: naver.maps.Position.TOP_RIGHT,
+		  },
+		};
+		//설정해놓은 옵션을 바탕으로 지도 생성
+		map = new naver.maps.Map(mapElement.current, mapOptions);
+		setNewMap(map);
+	  }, []);
+	  return (
+		  <div id="map" ref={mapElement} style={{ minHeight: "100vh" }}></div>
+	  );
 };
 
 export default MapNaverDefault;

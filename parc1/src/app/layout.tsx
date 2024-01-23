@@ -24,11 +24,11 @@ export default function RootLayout({
   return (
       <html lang="en">
         <head>
-          <script
-            type="text/javascript"
-            src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_MAP_KEY}`}
-            async
-          /> {/* https://nextjs.org/docs/messages/no-sync-scripts */}
+        <script
+          type="text/javascript"
+          src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_MAP_KEY}`}
+          async
+        /> {/* https://nextjs.org/docs/messages/no-sync-scripts */}
         </head>
         <body>
           <section className={styles.container}>
