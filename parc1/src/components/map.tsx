@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 const MapNaverDefault = () => {
-	const { naver } = window;
 	const [newMap, setNewMap] = useState<naver.maps.Map | null>(null);
-  	let map: naver.maps.Map;
 	const mapElement = useRef<HTMLDivElement | null>(null);
 	useEffect(() => {
+		const { naver } = window;
+		let map: naver.maps.Map;
 		if (!mapElement.current || !naver) return;
 		const center = new naver.maps.LatLng(37.3595704, 127.105399);
 		const mapOptions: naver.maps.MapOptions = {
@@ -20,7 +20,7 @@ const MapNaverDefault = () => {
 		};
 		//설정해놓은 옵션을 바탕으로 지도 생성
 		map = new naver.maps.Map(mapElement.current, mapOptions);
-		setNewMap(map);
+		setNewMap(map); // 새 좌표로 움직일때 사용
 	  }, []);
 	  return (
 		  <div id="map" ref={mapElement} style={{ minHeight: "100vh" }}></div>
